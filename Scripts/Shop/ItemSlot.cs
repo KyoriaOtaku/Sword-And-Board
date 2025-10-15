@@ -4,11 +4,26 @@ using System.Collections;
 using System;
 using System.Runtime.Serialization;
 
+// Edit by Kyoria
+// Slot Category
+public enum SlotType
+{
+    Default,
+    Weapon,
+    Healment,
+    Chest,
+    Legs,
+    Feet,
+    Consumable
+}
+
 public abstract class ItemSlot : ISerializationCallbackReceiver
 {
+
     [NonSerialized] public ItemInventoryData itemData; // The data for the item in this slot
     [SerializeField] protected int _itemID = -1; // Item ID for serialization
     [SerializeField] protected int stackSize; // stack size
+    public SlotType type = SlotType.Default; // Slot type
 
     public ItemInventoryData ItemData => itemData;
     public int StackSize => stackSize;
@@ -52,7 +67,9 @@ public abstract class ItemSlot : ISerializationCallbackReceiver
 
      public bool AddToStack(int amount) // Add items to the stack
     {
-        if (itemData == null || !itemData.isStackable)
+        // Edit by Kyoria
+        // add a category comparator to the return
+        if ((itemData == null || !itemData.isStackable) && itemData.type == type)
             return false;
 
         stackSize += amount;
