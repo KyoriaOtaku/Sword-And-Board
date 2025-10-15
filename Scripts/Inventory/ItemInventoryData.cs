@@ -21,8 +21,11 @@ public class ItemInventoryData : ScriptableObject
 
     public string ItemType; // Type of the item (e.g., Weapon, Armor, Consumable);
     public GameObject WorldModelPrefab; // Prefab to represent the item in the world;
-
-
+    
+    // Edit by Kyoria
+    // add a slot type to limit to just one category
+    // SlotType is a enum in ItemSlot
+    public SlotType type; // Slot type for the item;
 
 }
 
